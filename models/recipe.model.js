@@ -11,7 +11,7 @@ const recipeSchema = new mongoose.Schema({
   heading: { type: String, required: true, trim: true },
   shortDescription: { type: String, required: true },
   longDescription: { type: String },
-  image: { type: String },
+  image: { type: String , default: "" },
   prepTime: { type: Number, required: true },
   cookTime: { type: Number, required: true },
   totalTime: { type: Number },

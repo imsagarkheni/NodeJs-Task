@@ -8,43 +8,50 @@ const constants = require("../../utils/constants");
 exports.create = async (req, res) => {
   try {
     const primary = mongoConnection.useDb(constants.DEFAULT_DB);
+    const Recipe = primary.model(constants.MODELS.recipe, recipeModel);
 
     let ingredients = [];
     if (req.body.ingredients) {
-      if (typeof req.body.ingredients === "string") {
-        ingredients = JSON.parse(req.body.ingredients);
-      } else {
-        ingredients = req.body.ingredients;
-      }
+      ingredients =
+        typeof req.body.ingredients === "string"
+          ? JSON.parse(req.body.ingredients)
+          : req.body.ingredients;
     }
 
-    const payload = {
+    let imagePath = "";
+    
+    if (req.file && req.file.buffer) {
+      const timestamp = Date.now();
+      const ext = path.extname(req.file.originalname);
+      const fileName = `${timestamp}${ext}`;
+      const uploadDir = path.join(__dirname, "../../public/uploads/recipe");
+      const filePath = path.join(uploadDir, fileName);
+
+      if (!fs.existsSync(uploadDir)) {
+        fs.mkdirSync(uploadDir, { recursive: true });
+      }
+      
+      fs.writeFileSync(filePath, req.file.buffer);
+      imagePath = `public/uploads/recipe/${fileName}`;
+    }
+
+    const recipe = await Recipe.create({
       heading: req.body.heading,
       shortDescription: req.body.shortDescription,
       longDescription: req.body.longDescription || "",
       prepTime: Number(req.body.prepTime) || 0,
       cookTime: Number(req.body.cookTime) || 0,
-      ingredients: ingredients,
-    };
+      ingredients,
+      image: imagePath,
+    });
 
-    const Recipe = primary.model(constants.MODELS.recipe, recipeModel);
-    const recipe = await Recipe.create(payload);
+    const finalRecipe = await Recipe.findById(recipe._id);
 
-    if (req.file) {
-      const ext = path.extname(req.file.originalname);
-      const fileName = `${recipe._id}${ext}`;
-      const filePath = path.join(__dirname, "../../public/uploads/recipes", fileName);
-
-      fs.mkdirSync(path.dirname(filePath), { recursive: true });
-
-      fs.writeFileSync(filePath, req.file.buffer);
-
-      recipe.image = fileName;
-      await recipe.save();
-    }
-
-    return responseManager.onSuccess("Recipe created successfully", recipe, res);
-
+    return responseManager.onSuccess(
+      "Recipe created successfully",
+      finalRecipe,
+      res
+    );
   } catch (error) {
     console.error("Create recipe error:", error);
     return responseManager.onError(error, res);
