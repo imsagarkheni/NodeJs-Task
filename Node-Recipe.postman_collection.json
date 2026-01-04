@@ -1,0 +1,217 @@
+{
+	"info": {
+		"_postman_id": "362d0dd5-121e-4ce4-8bb6-6166e0a2fef6",
+		"name": "Node-Recipe",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21952677"
+	},
+	"item": [
+		{
+			"name": "Create Recipe",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "heading",
+							"value": "Fruit Salad",
+							"type": "text"
+						},
+						{
+							"key": "shortDescription",
+							"value": "Fresh and healthy fruit salad",
+							"type": "text"
+						},
+						{
+							"key": "longDescription",
+							"value": "Mix of seasonal fruits for a refreshing dessert or snack.",
+							"type": "text"
+						},
+						{
+							"key": "prepTime",
+							"value": "0.3",
+							"type": "text"
+						},
+						{
+							"key": "cookTime",
+							"value": "0",
+							"type": "text"
+						},
+						{
+							"key": "ingredients",
+							"value": "[{\"label\":\"Apple\",\"quantity\":1,\"unit\":\"pcs\"},{\"label\":\"Banana\",\"quantity\":1,\"unit\":\"pcs\"},{\"label\":\"Orange\",\"quantity\":1,\"unit\":\"pcs\"},{\"label\":\"Honey\",\"quantity\":1,\"unit\":\"tbsp\"},{\"label\":\"Yogurt\",\"quantity\":50,\"unit\":\"ml\"}]",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/D:/TrooTech/fruits.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3100/apis/v1/recipe/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3100",
+					"path": [
+						"apis",
+						"v1",
+						"recipe",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"page\": 1,\n  \"limit\": 10,\n  \"search\": \"\",\n  \"status\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3100/apis/v1/recipe/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3100",
+					"path": [
+						"apis",
+						"v1",
+						"recipe",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get By Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3100/apis/v1/recipe/695a4061a389a429e3db7afc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3100",
+					"path": [
+						"apis",
+						"v1",
+						"recipe",
+						"695a4061a389a429e3db7afc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Status",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": \"695a4061a389a429e3db7afc\",\n  \"status\": false\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3100/apis/v1/recipe/status",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3100",
+					"path": [
+						"apis",
+						"v1",
+						"recipe",
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Dynamic Serves",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3100/apis/v1/recipe/serves/695a4061a389a429e3db7afc?servers=3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3100",
+					"path": [
+						"apis",
+						"v1",
+						"recipe",
+						"serves",
+						"695a4061a389a429e3db7afc"
+					],
+					"query": [
+						{
+							"key": "servers",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3100/apis/v1/recipe/695a4581e9745ddd0a4f5392",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3100",
+					"path": [
+						"apis",
+						"v1",
+						"recipe",
+						"695a4581e9745ddd0a4f5392"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
