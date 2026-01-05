@@ -38,6 +38,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 const apispaths = [
+  { pathUrl: '/auth', routeFile: 'login' },
   { pathUrl: '/recipe', routeFile: 'recipes' },
 ];
 apispaths.forEach((path) => {

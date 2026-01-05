@@ -8,6 +8,7 @@ const ingredientSchema = new mongoose.Schema({
 }, { _id: false });
 
 const recipeSchema = new mongoose.Schema({
+  userId: { type: String, required: true },
   heading: { type: String, required: true, trim: true },
   shortDescription: { type: String, required: true },
   longDescription: { type: String },

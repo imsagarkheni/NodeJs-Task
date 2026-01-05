@@ -1,0 +1,315 @@
+{
+	"info": {
+		"_postman_id": "f7dbc953-0423-424a-8de8-4b4d845cdfff",
+		"name": "Node-Recipe Copy 2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38868412",
+		"_collection_link": "https://erp333-7794.postman.co/workspace/ERP-Workspace~c3df6f48-02e1-416f-8d37-6904de3fa791/collection/38868412-f7dbc953-0423-424a-8de8-4b4d845cdfff?action=share&source=collection_link&creator=38868412"
+	},
+	"item": [
+		{
+			"name": "Create Recipe",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOiI2OTViNTVjYzZlODYxMmNhMWE2YmE1NzIiLCJpYXQiOjE3Njc1OTM0NjV9.nX8l9hSU5Ax24DxAZM9j7NVT3k3gQLOzFgouBbsahpA",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "heading",
+							"value": "Test",
+							"type": "text"
+						},
+						{
+							"key": "shortDescription",
+							"value": "Fresh and healthy fruit salad",
+							"type": "text"
+						},
+						{
+							"key": "longDescription",
+							"value": "Mix of seasonal fruits for a refreshing dessert or snack.",
+							"type": "text"
+						},
+						{
+							"key": "prepTime",
+							"value": "0.3",
+							"type": "text"
+						},
+						{
+							"key": "cookTime",
+							"value": "0",
+							"type": "text"
+						},
+						{
+							"key": "ingredients",
+							"value": "[{\"label\":\"Apple\",\"quantity\":1,\"unit\":\"pcs\"},{\"label\":\"Banana\",\"quantity\":1,\"unit\":\"pcs\"},{\"label\":\"Orange\",\"quantity\":1,\"unit\":\"pcs\"},{\"label\":\"Honey\",\"quantity\":1,\"unit\":\"tbsp\"},{\"label\":\"Yogurt\",\"quantity\":50,\"unit\":\"ml\"}]",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/home/troo/Downloads/whatsappbusiness.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3100/apis/v1/recipe/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3100",
+					"path": [
+						"apis",
+						"v1",
+						"recipe",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOiI2OTViNTVjYzZlODYxMmNhMWE2YmE1NzIiLCJpYXQiOjE3Njc1OTM0NjV9.nX8l9hSU5Ax24DxAZM9j7NVT3k3gQLOzFgouBbsahpA",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"page\": 1,\n  \"limit\": 50,\n  \"search\": \"\",\n  \"status\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3100/apis/v1/recipe/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3100",
+					"path": [
+						"apis",
+						"v1",
+						"recipe",
+						"list"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get By Id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOiI2OTViNTVjYzZlODYxMmNhMWE2YmE1NzIiLCJpYXQiOjE3Njc1OTM0NjV9.nX8l9hSU5Ax24DxAZM9j7NVT3k3gQLOzFgouBbsahpA",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3100/apis/v1/recipe/695b56d4e4aaa2acd224c742",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3100",
+					"path": [
+						"apis",
+						"v1",
+						"recipe",
+						"695b56d4e4aaa2acd224c742"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Status",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOiI2OTViNTVjYzZlODYxMmNhMWE2YmE1NzIiLCJpYXQiOjE3Njc1OTM0NjV9.nX8l9hSU5Ax24DxAZM9j7NVT3k3gQLOzFgouBbsahpA",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": \"695a4061a389a429e3db7afc\",\n  \"status\": false\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3100/apis/v1/recipe/status",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3100",
+					"path": [
+						"apis",
+						"v1",
+						"recipe",
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Dynamic Serves",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOiI2OTViNTVjYzZlODYxMmNhMWE2YmE1NzIiLCJpYXQiOjE3Njc1OTM0NjV9.nX8l9hSU5Ax24DxAZM9j7NVT3k3gQLOzFgouBbsahpA",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3100/apis/v1/recipe/serves/695a4061a389a429e3db7afc?servers=3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3100",
+					"path": [
+						"apis",
+						"v1",
+						"recipe",
+						"serves",
+						"695a4061a389a429e3db7afc"
+					],
+					"query": [
+						{
+							"key": "servers",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3100/apis/v1/recipe/695a4581e9745ddd0a4f5392",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3100",
+					"path": [
+						"apis",
+						"v1",
+						"recipe",
+						"695a4581e9745ddd0a4f5392"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"Sagar Kheni\",\n  \"mobile\": \"9876543210\",\n  \"email\": \"sagar@example.com\",\n  \"password\": \"Shk@123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3100/apis/v1/auth/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3100",
+					"path": [
+						"apis",
+						"v1",
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"sagar@example.com\",\n  \"password\": \"Shk@123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3100/apis/v1/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3100",
+					"path": [
+						"apis",
+						"v1",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
