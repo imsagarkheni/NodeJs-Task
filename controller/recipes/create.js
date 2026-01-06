@@ -1,5 +1,3 @@
-const fs = require("fs");
-const path = require("path");
 const mongoConnection = require("../../utils/connections");
 const responseManager = require("../../utils/response.manager");
 const recipeModel = require("../../models/recipe.model");
@@ -18,21 +16,13 @@ exports.create = async (req, res) => {
           : req.body.ingredients;
     }
 
-    let imagePath = "";
-    
-    if (req.file && req.file.buffer) {
-      const timestamp = Date.now();
-      const ext = path.extname(req.file.originalname);
-      const fileName = `${timestamp}${ext}`;
-      const uploadDir = path.join(__dirname, "../../public/uploads/recipe");
-      const filePath = path.join(uploadDir, fileName);
+    let image = null;
 
-      if (!fs.existsSync(uploadDir)) {
-        fs.mkdirSync(uploadDir, { recursive: true });
-      }
-      
-      fs.writeFileSync(filePath, req.file.buffer);
-      imagePath = `public/uploads/recipe/${fileName}`;
+    if (req.file && req.file.buffer) {
+      image = {
+        data: req.file.buffer,
+        contentType: req.file.mimetype,
+      };
     }
 
     const recipe = await Recipe.create({
@@ -42,14 +32,12 @@ exports.create = async (req, res) => {
       prepTime: Number(req.body.prepTime) || 0,
       cookTime: Number(req.body.cookTime) || 0,
       ingredients,
-      image: imagePath,
+      image,
     });
-
-    const finalRecipe = await Recipe.findById(recipe._id);
 
     return responseManager.onSuccess(
       "Recipe created successfully",
-      finalRecipe,
+      recipe,
       res
     );
   } catch (error) {

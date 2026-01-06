@@ -7,18 +7,15 @@ exports.getById = async (req, res) => {
   try {
     const primary = mongoConnection.useDb(constants.DEFAULT_DB);
 
-    const recipe = await primary
-      .model(constants.MODELS.recipe, recipeModel)
-      .findOne({
-        _id: req.params.id,
-      })
-      .lean();
+    const Recipe = primary.model(constants.MODELS.recipe, recipeModel);
+    const recipe = await Recipe.findById(req.params.id);
 
-    if (!recipe) {
-      return responseManager.badRequest({ message: "Recipe not found" }, res);
+    if (!recipe || !recipe.image?.data) {
+      return res.status(404).send("Image not found");
     }
 
-    return responseManager.onSuccess("Recipe fetched", recipe, res);
+    res.set("Content-Type", recipe.image.contentType);
+    res.send(recipe.image.data);
   } catch (err) {
     return responseManager.onError(err, res);
   }
